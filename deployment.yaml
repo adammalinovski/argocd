@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: container
-        image: kharatramesh/k8s_rollaback:webv2.0
+        image: kharatramesh/k8s_rollaback:webv3.0
         ports:
         - containerPort: 80
 ---
