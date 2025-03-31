@@ -1,19 +1,18 @@
 ---
-# 1. Headless Service for MySQL Pod DNS Discovery
+
 apiVersion: v1
 kind: Service
 metadata:
-  name: mysql-svc          # Stable DNS name base
-  # Deploys to 'default' namespace if not specified
+  name: mysql-svc
   labels:
     app: mysql
 spec:
   ports:
   - port: 3306
     name: mysql
-  clusterIP: None          # Headless service
+  clusterIP: None
   selector:
-    app: mysql             # Selects the MySQL Pods
+    app: mysql
 
 ---
 
@@ -35,7 +34,6 @@ spec:
       terminationGracePeriodSeconds: 10
       containers:
       - name: mysql
-        # --- Use your pushed custom image ---
         image:  adam943/mysql:latest
         imagePullPolicy: Always
         ports:
