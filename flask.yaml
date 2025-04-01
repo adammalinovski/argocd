@@ -76,4 +76,3 @@ spec:
             name: flask-service
             port:
               name: http
-
