@@ -69,7 +69,7 @@ spec:
   rules:
   - http:
       paths:
-      - path: /
+      - path: /adams-app
         pathType: Prefix
         backend:
           service:
