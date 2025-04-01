@@ -25,11 +25,20 @@ spec:
         - name: DB_HOST
           value: "mysql-svc"
         - name: DB_NAME
-          value: "test"
+          valueFrom:
+            secretKeyRef:
+              name: mysql-db-credentials
+              key: db-name
         - name: DB_USER
-          value: "root"
+          valueFrom:
+            secretKeyRef:
+              name: mysql-db-credentials
+              key: db-user
         - name: DB_PASSWORD
-          value: "123"
+          valueFrom:
+            secretKeyRef:
+              name: mysql-db-credentials
+              key: db-password
 
 ---
 
@@ -66,3 +75,4 @@ spec:
             name: flask-service
             port:
               name: http
+

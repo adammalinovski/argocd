@@ -41,9 +41,15 @@ spec:
           name: mysql
         env:
         - name: MYSQL_ROOT_PASSWORD
-          value: "123"
+          valueFrom:
+            secretKeyRef:
+              name: mysql-db-credentials
+              key: db-root-password
         - name: MYSQL_DATABASE
-          value: "test"
+          valueFrom:
+            secretKeyRef:
+              name: mysql-db-credentials
+              key: db-name
         volumeMounts:
         - name: mysql-temp-storage
           mountPath: /var/lib/mysql
