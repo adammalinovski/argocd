@@ -1,61 +1,61 @@
----
+# ---
 
-apiVersion: v1
-kind: Service
-metadata:
-  name: mysql-svc
-  labels:
-    app: mysql
-spec:
-  ports:
-  - port: 3306
-    name: mysql
-  clusterIP: None
-  selector:
-    app: mysql
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: mysql-svc
+#   labels:
+#     app: mysql
+# spec:
+#   ports:
+#   - port: 3306
+#     name: mysql
+#   clusterIP: None
+#   selector:
+#     app: mysql
 
----
+# ---
 
-apiVersion: apps/v1
-kind: StatefulSet
-metadata:
-  name: mysql
-spec:
-  selector:
-    matchLabels:
-      app: mysql
-  serviceName: "mysql-svc"
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        app: mysql
-    spec:
-      imagePullSecrets:
-      - name: dockerhub-creds
-      containers:
-      - name: mysql
-        image:  adam943/mysql:latest
-        imagePullPolicy: Always
-        ports:
-        - containerPort: 3306
-          name: mysql
-        env:
-        - name: MYSQL_ROOT_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: mysql-db-credentials
-              key: db-root-password
-        - name: MYSQL_DATABASE
-          valueFrom:
-            secretKeyRef:
-              name: mysql-db-credentials
-              key: db-name
-        volumeMounts:
-        - name: mysql-temp-storage
-          mountPath: /var/lib/mysql
-      volumes:
-      - name: mysql-temp-storage
-        emptyDir: {}
+# apiVersion: apps/v1
+# kind: StatefulSet
+# metadata:
+#   name: mysql
+# spec:
+#   selector:
+#     matchLabels:
+#       app: mysql
+#   serviceName: "mysql-svc"
+#   replicas: 1
+#   template:
+#     metadata:
+#       labels:
+#         app: mysql
+#     spec:
+#       imagePullSecrets:
+#       - name: dockerhub-creds
+#       containers:
+#       - name: mysql
+#         image:  adam943/mysql:latest
+#         imagePullPolicy: Always
+#         ports:
+#         - containerPort: 3306
+#           name: mysql
+#         env:
+#         - name: MYSQL_ROOT_PASSWORD
+#           valueFrom:
+#             secretKeyRef:
+#               name: mysql-db-credentials
+#               key: db-root-password
+#         - name: MYSQL_DATABASE
+#           valueFrom:
+#             secretKeyRef:
+#               name: mysql-db-credentials
+#               key: db-name
+#         volumeMounts:
+#         - name: mysql-temp-storage
+#           mountPath: /var/lib/mysql
+#       volumes:
+#       - name: mysql-temp-storage
+#         emptyDir: {}
 
 
