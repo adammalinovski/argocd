@@ -54,7 +54,6 @@ spec:
     app: flask-app
   ports:
   - name: http
-    protocol: TCP
     port: 80
     targetPort: http
 
