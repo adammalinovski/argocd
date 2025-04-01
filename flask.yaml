@@ -6,6 +6,8 @@ metadata:
     app: flask-app
 spec:
   replicas: 3
+  imagePullSecrets:
+  - name: dockerhub-creds
   selector:
     matchLabels:
       app: flask-app

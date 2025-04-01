@@ -25,13 +25,14 @@ spec:
     matchLabels:
       app: mysql
   serviceName: "mysql-svc"
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
         app: mysql
     spec:
-      terminationGracePeriodSeconds: 10
+      imagePullSecrets:
+      - name: dockerhub-creds
       containers:
       - name: mysql
         image:  adam943/mysql:latest
@@ -56,3 +57,5 @@ spec:
       volumes:
       - name: mysql-temp-storage
         emptyDir: {}
+
+
